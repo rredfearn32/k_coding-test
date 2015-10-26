@@ -1,10 +1,11 @@
 {
-  "name": "js-challenge",
-  "version": "1.0.0",
+  "name": "driver-data",
+  "version": "1.1.0",
   "description": "",
   "main": "server.js",
   "dependencies": {
     "canned": "^0.3.4",
+    "node-static": "^0.7.7",
     "randopeep": "^0.2.5"
   },
   "devDependencies": {},
@@ -16,6 +17,5 @@
     "type": "git",
     "url": "."
   },
-  "author": "Kinexon",
-  "license": "ISC"
+  "author": "Kinexon"
 }

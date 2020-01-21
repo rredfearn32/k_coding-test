@@ -48,10 +48,10 @@ function genobj() {
 
 // Here we generate data for the api that can use in front end
 setTimeout(function() {
-    //var o = JSON.parse(fs.readFileSync('./cars/index.get.json', 'utf8'));
+    var o = JSON.parse(fs.readFileSync('./cars/index.get.json', 'utf8'));
     //TODO: Move object location random every 5 seconds
-    //fs.writeFile("./cars/index.get.json",
-    //    JSON.stringify(o));
+    fs.writeFile("./cars/index.get.json",
+       JSON.stringify(o));
 }, 5000);
 
 function cf() {fs.writeFile("./index.get.json", '[]');}
@@ -66,3 +66,4 @@ http.createServer(function (request, response) {
         file.serve(request, response);
     }).resume();
 }).listen(8080);
+

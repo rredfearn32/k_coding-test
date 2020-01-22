@@ -9,11 +9,12 @@
     "node-static": "^0.7.7",
     "randopeep": "^0.2.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "scss": "node-sass --watch app/style.scss -o app/"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

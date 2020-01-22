@@ -1,3 +1,4 @@
 import App from './src/App.js';
 
-const app = new App();
+const e = React.createElement;
+ReactDOM.render(e(App), document.getElementById('root'));

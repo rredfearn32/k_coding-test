@@ -79,6 +79,7 @@ http.createServer(can).listen(3000);
 
 http.createServer(function (request, response) {
     request.addListener('end', function () {
+        console.log('FOOBAR');
         // Serve files!
         file.serve(request, response);
     }).resume();

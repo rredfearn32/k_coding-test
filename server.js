@@ -46,12 +46,31 @@ function genobj() {
     fs.writeFileSync("./index.get.json", JSON.stringify(o));
 }
 
+/**
+ * Shuffles array in place. Fisher-Yates algorithm.
+ * @param {Array} a items An array containing the items.
+ */
+function shuffleArray(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
+}
+
 // Here we generate data for the api that can use in front end
-setTimeout(function() {
-    var o = JSON.parse(fs.readFileSync('./cars/index.get.json', 'utf8'));
-    //TODO: Move object location random every 5 seconds
-    fs.writeFile("./cars/index.get.json",
-       JSON.stringify(o));
+
+setInterval(function() {
+    var o = JSON.parse(fs.readFileSync('./index.get.json', 'utf8'));
+    // Move object location random every 5 seconds
+    shuffleArray(o);
+    fs.writeFile("./index.get.json", JSON.stringify(o), (err) => {
+        if (err) throw err;
+        console.log('Mock data shuffled');
+    });
 }, 5000);
 
 function cf() {fs.writeFile("./index.get.json", '[]');}
@@ -60,9 +79,7 @@ http.createServer(can).listen(3000);
 
 http.createServer(function (request, response) {
     request.addListener('end', function () {
-        //
         // Serve files!
-        //
         file.serve(request, response);
     }).resume();
 }).listen(8080);

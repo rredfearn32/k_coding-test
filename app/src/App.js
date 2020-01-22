@@ -1,4 +1,4 @@
-import DataController from './DataController.mjs';
+import DataController from './DataController.js';
 
 class App {
     dataController;

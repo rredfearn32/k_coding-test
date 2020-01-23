@@ -1,7 +1,10 @@
-import DataController from './DataController.js';
+import DataController from './Controllers/DataController.js';
+
+import Car from './Models/Car.js'
+
 const e = React.createElement;
 
-class App extends React.Component {
+export default class App extends React.Component {
     dataController;
     
     constructor() {
@@ -24,14 +27,12 @@ class App extends React.Component {
     }
 
     render() {
-        return e('div', { onClick: () => alert('foobar') },
+        return e('div', {},
             e('ul', {}, 
                 this.state.data.map(item => {
-                    return e('li', {}, item.driverName)
+                    return e(Car, {}, item.driverName)
                 })
             )
-        )
+        );
     }
 }
-
-export default App;

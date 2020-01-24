@@ -74,8 +74,8 @@ function rebuildDatabase() {
     });
 }
 
-setTimeout(function() {
-    rebuildDatabase()
+setInterval(function() {
+    rebuildDatabase();
 }, 5000)
 
 function cf() {fs.writeFile("./index.get.json", '[]');}

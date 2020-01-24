@@ -1,6 +1,7 @@
 import DataController from './Controllers/DataController.js';
 
-import CarList from './Models/CarList.js'
+import CarList from './Components/CarList.js';
+import HeaderNav from './Components/HeaderNav.js';
 
 const e = React.createElement;
 
@@ -20,7 +21,8 @@ export default class App extends React.Component {
     }
 
     render() {
-        return e('div', {className: 'container'}, [
+        return e('div', {}, [
+                    e(HeaderNav, {key: 'headernav'}, null),
                     e(CarList, {key: 'carList', getCars: this.getData.bind(this)}, null)
                 ]);
     }

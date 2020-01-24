@@ -20,8 +20,11 @@ export default class CarList extends React.Component {
     }
 
     render() {
-        return e('div', {className: 'row'}, this.state.carObjects.map(car => {
-            return e(Car, {key: car.driverID, car: car}, null)
-        }));
+        return e('div', {className: 'container mt-5'},
+            e('div', {className: 'row'}, this.state.carObjects.map(car => {
+                    return e(Car, {key: car.driverID, car: car}, null)
+                })
+            )
+        )
     }
 }

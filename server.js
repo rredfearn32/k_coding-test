@@ -32,6 +32,7 @@ genobj(); genobj(); genobj(); genobj(); genobj();
 function genobj() {
     var o = JSON.parse(fs.readFileSync('./index.get.json', 'utf8'));
     var d = {
+        driverID: randopeep.internet.username(),
         driverName: randopeep.name(),
         driverCityOrigin: randopeep.address.city(),
         "driverLanguage": ['de', 'en', 'nl', 'fr', 'es', 'ar'][Math.floor(Math.random()*7)],
@@ -63,7 +64,7 @@ function shuffleArray(a) {
 
 // Here we generate data for the api that can use in front end
 
-setInterval(function() {
+function rebuildDatabase() {
     var o = JSON.parse(fs.readFileSync('./index.get.json', 'utf8'));
     // Move object location random every 5 seconds
     shuffleArray(o);
@@ -71,7 +72,11 @@ setInterval(function() {
         if (err) throw err;
         console.log('Mock data shuffled');
     });
-}, 5000);
+}
+
+setTimeout(function() {
+    rebuildDatabase()
+}, 5000)
 
 function cf() {fs.writeFile("./index.get.json", '[]');}
 
@@ -79,7 +84,7 @@ http.createServer(can).listen(3000);
 
 http.createServer(function (request, response) {
     request.addListener('end', function () {
-        console.log('FOOBAR');
+        
         // Serve files!
         file.serve(request, response);
     }).resume();

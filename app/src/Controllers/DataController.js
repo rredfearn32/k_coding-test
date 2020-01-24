@@ -1,7 +1,5 @@
 class DataController {
-    constructor() {
-        console.log('Created data controller');
-    }
+    constructor() {}
 
     getDataFromAPI() {
         return fetch('http://localhost:3000')

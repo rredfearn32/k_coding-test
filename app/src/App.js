@@ -1,6 +1,6 @@
 import DataController from './Controllers/DataController.js';
 
-import Car from './Models/Car.js'
+import CarList from './Models/CarList.js'
 
 const e = React.createElement;
 
@@ -12,27 +12,16 @@ export default class App extends React.Component {
         this.state = {
             data: []
         }
-
-        this.getData();
     }
 
     getData() {
         this.dataController = new DataController();
-        this.dataController.getDataFromAPI()
-        .then(data => {
-            this.setState({
-                data: data
-            });
-        });
+        return this.dataController.getDataFromAPI();
     }
 
     render() {
-        return e('div', {},
-            e('ul', {}, 
-                this.state.data.map(item => {
-                    return e(Car, {}, item.driverName)
-                })
-            )
-        );
+        return e('div', {className: 'container'}, [
+                    e(CarList, {key: 'carList', getCars: this.getData.bind(this)}, null)
+                ]);
     }
 }

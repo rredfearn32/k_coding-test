@@ -62,6 +62,7 @@ function shuffleArray(a) {
 }
 
 // Here we generate data for the api that can use in front end
+
 setInterval(function() {
     var o = JSON.parse(fs.readFileSync('./index.get.json', 'utf8'));
     // Move object location random every 5 seconds
@@ -78,7 +79,9 @@ http.createServer(can).listen(3000);
 
 http.createServer(function (request, response) {
     request.addListener('end', function () {
+        console.log('FOOBAR');
         // Serve files!
         file.serve(request, response);
     }).resume();
 }).listen(8080);
+

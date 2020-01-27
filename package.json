@@ -4,6 +4,8 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "bootstrap": "^4.4.1",
     "canned": "^0.3.4",
     "node-sass": "^4.13.1",
     "node-static": "^0.7.7",

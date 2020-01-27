@@ -6,24 +6,16 @@ import HeaderNav from './Components/HeaderNav.js';
 const e = React.createElement;
 
 export default class App extends React.Component {
-    dataController;
+    dataController = new DataController();
     
     constructor() {
         super();
-        this.state = {
-            data: []
-        }
-    }
-
-    getData() {
-        this.dataController = new DataController();
-        return this.dataController.getDataFromAPI();
     }
 
     render() {
-        return e('div', {}, [
+        return e('div', {id: 'app'}, [
                     e(HeaderNav, {key: 'headernav'}, null),
-                    e(CarList, {key: 'carList', getCars: this.getData.bind(this)}, null)
+                    e(CarList, {key: 'carList', dataController: this.dataController}, null)
                 ]);
     }
 }

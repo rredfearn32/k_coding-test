@@ -1,0 +1,22 @@
+#app {
+    background: #f7f7f7;
+
+    .car-item {
+        position: relative;
+
+        a {
+            color: $primary;
+
+            &.car-favourite-button {
+                position: absolute;
+            }
+        }
+
+        img {
+            min-width: 100px;
+            min-height: 100px;
+            background: #333;
+        }
+    }
+}
+

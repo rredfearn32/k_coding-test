@@ -1,1 +1,9 @@
-@import '_data.scss';
+@import '_variables';
+
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss';
+
+@import '_utils';
+@import '_mixins';
+
+@import '_app';

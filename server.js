@@ -29,10 +29,17 @@ genobj(); genobj(); genobj(); genobj(); genobj();
 genobj(); genobj(); genobj(); genobj(); genobj();
 genobj(); genobj(); genobj(); genobj(); genobj();
 
+function generateGUID() {
+    var S4 = function() {
+       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}
+
 function genobj() {
     var o = JSON.parse(fs.readFileSync('./index.get.json', 'utf8'));
     var d = {
-        driverID: randopeep.internet.username(),
+        driverID: generateGUID(),
         driverName: randopeep.name(),
         driverCityOrigin: randopeep.address.city(),
         "driverLanguage": ['de', 'en', 'nl', 'fr', 'es', 'ar'][Math.floor(Math.random()*7)],
@@ -51,19 +58,19 @@ function genobj() {
  * Shuffles array in place. Fisher-Yates algorithm.
  * @param {Array} a items An array containing the items.
  */
-function shuffleArray(a) {
-    var j, x, i;
-    for (i = a.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = a[i];
-        a[i] = a[j];
-        a[j] = x;
+function shuffleArray(array) {
+    var randomNumberZeroToIndex, arrayItemBackup, i;
+    for (i = array.length - 1; i > 0; i--) {
+        // Generate random number between 0 - index
+        randomNumberZeroToIndex = Math.floor(Math.random() * (i + 1)); // So the item may get swapped with itself
+        arrayItemBackup = array[i]; // Backup array item at index
+        array[i] = array[randomNumberZeroToIndex];
+        array[randomNumberZeroToIndex] = arrayItemBackup;
     }
-    return a;
+    return array;
 }
 
 // Here we generate data for the api that can use in front end
-
 function rebuildDatabase() {
     var o = JSON.parse(fs.readFileSync('./index.get.json', 'utf8'));
     // Move object location random every 5 seconds
@@ -73,7 +80,6 @@ function rebuildDatabase() {
         console.log('Mock data shuffled');
     });
 }
-
 setInterval(function() {
     rebuildDatabase();
 }, 5000)

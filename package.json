@@ -17,7 +17,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "scss": "node-sass --watch app/scss/style.scss -o app/"
+    "scss": "node-sass --watch app/scss/ -o app/ --output-style compressed"
   },
   "repository": {
     "type": "git",

@@ -1,9 +1,11 @@
-@import '_variables';
+@import 'variables';
 
 @import '../../node_modules/bootstrap/scss/bootstrap';
-@import '../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import './fontawesome/scss/fontawesome';
+@import './fontawesome/scss/regular';
+@import './fontawesome/scss/solid';
 
-@import '_utils';
-@import '_mixins';
+@import 'utils';
+@import 'mixins';
 
-@import '_app';
+@import 'app';

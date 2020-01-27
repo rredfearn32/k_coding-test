@@ -1,4 +1,5 @@
 import Car from './Car.js'
+import Filters from './Filters.js'
 
 const e = React.createElement;
 
@@ -29,11 +30,15 @@ export default class CarList extends React.Component {
     }
 
     render() {
-        return e('div', {className: 'container mt-5'},
-            e('div', {className: 'row'}, this.state.carObjects.map(car => {
-                    return e(Car, {key: car.driverID, car: car, applyFilter: this.filterCars.bind(this)}, null)
-                })
-            )
+        return e('div', {className: 'container mt-5'}, [
+                e('div', {key: 'filtersContainer', className: 'row'},
+                    e(Filters, {cars: this.state.carObjects}, null)
+                ),
+                e('div', {key: 'carlist', className: 'row'}, this.state.carObjects.map(car => {
+                        return e(Car, {key: car.driverID, car: car, applyFilter: this.filterCars.bind(this)}, null)
+                    })
+                )
+            ]
         )
     }
 }

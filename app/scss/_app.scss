@@ -4,18 +4,33 @@
     .car-item {
         position: relative;
 
-        a {
+        a, button {
             color: $primary;
-
-            &.car-favourite-button {
-                position: absolute;
-            }
         }
 
         img {
             min-width: 100px;
             min-height: 100px;
             background: #333;
+        }
+
+        .car-favourite-button {
+            opacity: 0;
+            position: absolute;
+            border: none;
+            background: none;
+            top: 5px;
+            right: 10px;
+
+            &:focus, &.favourite {
+                opacity: 1;
+            }
+        }
+
+        &:hover {
+            .car-favourite-button {
+                opacity: 1;
+            }
         }
     }
 }

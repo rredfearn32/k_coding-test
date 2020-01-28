@@ -56,6 +56,7 @@ export default class Car extends React.Component {
                                         e('img', {key: 'thumbnail', src: 'https://placeimg.com/100/100/people?z=' + this.state.driverID, className: 'rounded-circle', title: this.state.driverName, alt: 'Driver profile picture'}, null),
                                         e('div', {key: 'titleContainer', className: 'ml-3'}, [
                                             e('h4', {key: 'title', title: 'Driver name', className: 'mb-1 h4'}, this.state.driverName),
+                                            // Why is this.state.driverGender returning null within the icon, but this.props.car.driverGender works?
                                             e(CarMeta, {key: 'driverGender', icon: `fas fa-${this.props.car.driverGender}`, fw: false, detail: utils.capitalizeFirstLetter(this.state.driverGender)}, null),
                                         ])
                                     ]
@@ -63,7 +64,6 @@ export default class Car extends React.Component {
                                 e('div', {key: 'metaContainer', className: 'mt-3 border-top pt-3'}, [
                                     e(CarMeta, {key: 'carMake', icon: 'fas fa-car', fw: true, detail: this.state.carMake}, null),
                                     e(CarMeta, {key: 'driverInfo', icon: 'fas fa-info-circle', fw: true, detail: this.state.driverInfo}, null),
-                                    // Why is this.state.driverGender returning null, but this.props.car.driverGender works?
                                     e(CarMeta, {key: 'driverCityOrigins', icon: 'fas fa-home', fw: true, detail: this.state.driverCityOrigin}, null),
                                     e(CarMeta, {key: 'driverLocation', icon: 'fas fa-map-marker-alt', fw: true, detail: this.state.location}, null),
                                     e(CarMeta, {key: 'kmDriven', icon: 'fas fa-road', fw: true, detail: this.state.kmDriven + 'km'}, null),

@@ -15,7 +15,8 @@ export default class Car extends React.Component {
             driverInfo: '',
             carMake: '',
             kmDriven: '',
-            location: ''
+            location: '',
+            favourite: false
         }
     }
 
@@ -30,20 +31,16 @@ export default class Car extends React.Component {
             carMake: this.props.car.carMake,
             kmDriven: this.props.car.kmDriven,
             location: this.props.car.location,
-            favourite: false
+            favourite: this.props.car.favourite
         });
-    }
-
-    filterByCarMake(e) {
-        e.preventDefault();
-        this.props.dataController.filterCars('filterByCarMake', this.state.carMake)
     }
 
     toggleFavourite(e) {
         e.preventDefault();
         this.setState({
             favourite: !this.state.favourite
-        })
+        });
+        this.props.updateCar(this);
     }
 
     render() {
@@ -51,7 +48,7 @@ export default class Car extends React.Component {
         return e('div', {className: 'col-12 col-md-6 col-lg-4 d-inline-block mb-4 d-flex'},
                     e('div', {className: 'car-item card flex-fill'},
                         e('div', {className: 'card-body'}, [
-                                e('button', {key: 'favouriteButton', className: `car-favourite-button ${(this.state.favourite ? 'favourite':'')}`, title: favouriteButtonText, onClick: this.toggleFavourite.bind(this)}, [
+                                e('button', {key: 'favouriteButton', type: 'button', className: `car-favourite-button ${(this.state.favourite ? 'favourite':'')}`, title: favouriteButtonText, onClick: this.toggleFavourite.bind(this)}, [
                                     e('i', {key: 'favouriteIcon', className: `${(this.state.favourite ? 'fas':'far')} fa-heart`}, null),
                                     e('span', {key: 'favouriteCaption', className: 'screen-reader-only'}, favouriteButtonText)
                                 ]),
@@ -65,12 +62,15 @@ export default class Car extends React.Component {
                                 ),
                                 e('div', {key: 'metaContainer', className: 'mt-3 border-top pt-3'}, [
                                     e(CarMeta, {key: 'carMake', icon: 'fas fa-car', fw: true, detail: this.state.carMake}, null),
-                                    e(CarMeta, {key: 'driverPhone', icon: 'fas fa-phone', fw: true, detail: this.state.driverPhone}, null),
                                     e(CarMeta, {key: 'driverInfo', icon: 'fas fa-info-circle', fw: true, detail: this.state.driverInfo}, null),
                                     // Why is this.state.driverGender returning null, but this.props.car.driverGender works?
                                     e(CarMeta, {key: 'driverCityOrigins', icon: 'fas fa-home', fw: true, detail: this.state.driverCityOrigin}, null),
                                     e(CarMeta, {key: 'driverLocation', icon: 'fas fa-map-marker-alt', fw: true, detail: this.state.location}, null),
-                                    e(CarMeta, {key: 'kmDriven', icon: 'fas fa-road', fw: true, detail: this.state.kmDriven + 'km'}, null)
+                                    e(CarMeta, {key: 'kmDriven', icon: 'fas fa-road', fw: true, detail: this.state.kmDriven + 'km'}, null),
+                                    e('button', {key: 'contactButton', type: 'button', className: 'btn btn-outline-primary w-100 mt-3', onClick: () => {alert('Start a call!')}}, [
+                                        e('i', {key: 'contactButtonIcon', className: 'fas fa-phone'}, null),
+                                        e('span', {key: 'contactText', className: 'ml-2'}, `Call ${this.state.driverPhone}`)
+                                    ])
                                 ])
                             ]
                         )

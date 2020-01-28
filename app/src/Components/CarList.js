@@ -8,7 +8,11 @@ export default class CarList extends React.Component {
         super();
 
         this.state = {
-            carObjects: []
+            carObjects: [],
+            filters: {
+                onlyFavourites: false,
+                searchTerm: ''
+            }
         }
     }
 
@@ -20,22 +24,43 @@ export default class CarList extends React.Component {
         });
     }
 
-    /**
-     * Filter the cars based on a prop value
-     * @param {String} prop 
-     * @param {String} value 
-     */
-    filterCars(prop, value) {
-        this.dataController.filterCars(prop, value);
+    updateCar(newCar) {
+        const newCars = this.state.carObjects.map(car => {
+            return car.driverID === newCar.state.driverID ? newCar.state : car; 
+        });
+        this.setState({
+            carObjects: newCars
+        });
+    }
+
+    updateFilters(filters) {
+        this.setState({
+            filters: filters
+        });
     }
 
     render() {
         return e('div', {className: 'container mt-5'}, [
                 e('div', {key: 'filtersContainer', className: 'row'},
-                    e(Filters, {cars: this.state.carObjects}, null)
+                    e(Filters, {filters: this.state.filters, updateFilters: this.updateFilters.bind(this)}, null)
                 ),
                 e('div', {key: 'carlist', className: 'row'}, this.state.carObjects.map(car => {
-                        return e(Car, {key: car.driverID, car: car, applyFilter: this.filterCars.bind(this)}, null)
+                        
+                        if (this.state.filters.onlyFavourites && !car.favourite) {
+                            return null;
+                        } else {
+                            if (this.state.filters.searchTerm.length > 0) {
+                                for(const prop in car) {
+                                    if (Object.prototype.hasOwnProperty.call(car, prop) && typeof car[prop] === 'string') {
+                                        if (car[prop].toLowerCase().includes(this.state.filters.searchTerm.toLowerCase())) {
+                                            return e(Car, {key: car.driverID, car: car, updateCar: this.updateCar.bind(this)}, null);
+                                        }
+                                    }
+                                }
+                            } else {
+                                return e(Car, {key: car.driverID, car: car, updateCar: this.updateCar.bind(this)}, null)
+                            }
+                        }
                     })
                 )
             ]

@@ -48,7 +48,8 @@ function genobj() {
         driverInfo: randopeep.corporate.catchPhrase(0),
         carMake: randopeep.corporate.name('large', 0),
         "kmDriven": Math.floor(Math.random() * 100000),
-        'location': randopeep.address.geo()
+        'location': randopeep.address.geo(),
+        favourite: false
     };
     o.push(d);
     fs.writeFileSync("./index.get.json", JSON.stringify(o));

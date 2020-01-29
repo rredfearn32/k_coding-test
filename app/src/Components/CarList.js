@@ -24,12 +24,12 @@ export default class CarList extends React.Component {
         });
     }
 
-    updateCar(newCar) {
-        const newCars = this.state.carObjects.map(car => {
-            return car.driverID === newCar.state.driverID ? newCar.state : car; 
-        });
+    toggleFavouriteByDriverID(targetDriverID) {
+        const carObjectsCopy = this.state.carObjects;
+        const targetCar = carObjectsCopy.find(car => car.driverID === targetDriverID)
+        targetCar.favourite = !targetCar.favourite;
         this.setState({
-            carObjects: newCars
+            carObjects: carObjectsCopy
         });
     }
 
@@ -58,7 +58,7 @@ export default class CarList extends React.Component {
                                     }
                                 }
                             } else {
-                                return e(Car, {key: car.driverID, car: car, updateCar: this.updateCar.bind(this)}, null)
+                                return e(Car, {key: car.driverID, car: car, toggleFavouriteByDriverID: this.toggleFavouriteByDriverID.bind(this)}, null)
                             }
                         }
                     })

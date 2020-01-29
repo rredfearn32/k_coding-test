@@ -41,9 +41,7 @@ export default class CarList extends React.Component {
 
     render() {
         return e('div', {className: 'container mt-5'}, [
-                e('div', {key: 'filtersContainer', className: 'row'},
-                    e(Filters, {filters: this.state.filters, updateFilters: this.updateFilters.bind(this)}, null)
-                ),
+                e(Filters, {key: 'filter', filters: this.state.filters, updateFilters: this.updateFilters.bind(this)}, null),
                 e('div', {key: 'carlist', className: 'row'}, this.state.carObjects.map(car => {
                         
                         if (this.state.filters.onlyFavourites && !car.favourite) {

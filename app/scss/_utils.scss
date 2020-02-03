@@ -14,13 +14,90 @@
 	width: 1px;
 }
 
-.switch-pill {
-	
-	input[type="checkbox"] {
+/* The toggle - the box around the switch */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  min-width: 50px;
+  height: 24px;
+  margin: 0;
 
-	}
+  /* Hide default HTML checkbox, but not with display: none, as this hides it from keyboard access */
+  input {
+    visibility:hidden;
 
-	label {
+    &:checked + .switch {
+      background-color: $dark-background-color;
+    }
 
-	}
+    &:focus + .switch {
+      box-shadow: 0 0 1px $dark-background-color;
+    }
+
+    &:checked + .switch:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+  }
+
+  /* The switch */
+  .switch {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: darken($light-background-color, 10%);
+    -webkit-transition: .4s;
+    transition: .4s;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: $light-background-color;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    /* Rounded switchs */
+    &.round
+    {
+      border-radius: 34px;
+
+      &:before
+      {
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &.dark
+  {
+    input
+    {
+      &:checked + .switch {
+        background-color: $light-background-color;
+      }
+
+      &:focus + .switch {
+        box-shadow: 0 0 1px $light-background-color;
+      }
+    }
+
+    .switch {
+      background-color: lighten($dark-background-color, 10%);
+
+      &:before
+      {
+        background-color: $dark-background-color;
+      }
+    }
+  }
 }

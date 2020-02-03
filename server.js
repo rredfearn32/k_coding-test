@@ -83,7 +83,7 @@ function rebuildDatabase() {
 }
 setInterval(function() {
     rebuildDatabase();
-}, 5000)
+}, 60000)
 
 function cf() {fs.writeFile("./index.get.json", '[]');}
 

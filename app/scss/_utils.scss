@@ -14,6 +14,10 @@
 	width: 1px;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 /* The toggle - the box around the switch */
 .toggle {
   position: relative;
@@ -28,11 +32,11 @@
     visibility:hidden;
 
     &:checked + .switch {
-      background-color: $dark-background-color;
+      background-color: $dark;
     }
 
     &:focus + .switch {
-      box-shadow: 0 0 1px $dark-background-color;
+      box-shadow: 0 0 1px $dark;
     }
 
     &:checked + .switch:before {
@@ -50,7 +54,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: darken($light-background-color, 10%);
+    background-color: darken($light, 10%);
     -webkit-transition: .4s;
     transition: .4s;
 
@@ -61,7 +65,7 @@
       width: 16px;
       left: 4px;
       bottom: 4px;
-      background-color: $light-background-color;
+      background-color: $light;
       -webkit-transition: .4s;
       transition: .4s;
     }
@@ -83,20 +87,20 @@
     input
     {
       &:checked + .switch {
-        background-color: $light-background-color;
+        background-color: $light;
       }
 
       &:focus + .switch {
-        box-shadow: 0 0 1px $light-background-color;
+        box-shadow: 0 0 1px $light;
       }
     }
 
     .switch {
-      background-color: lighten($dark-background-color, 10%);
+      background-color: lighten($dark, 10%);
 
       &:before
       {
-        background-color: $dark-background-color;
+        background-color: $dark;
       }
     }
   }

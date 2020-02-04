@@ -1,8 +1,9 @@
 #app {
     background: #f7f7f7;
+    min-height: 100vh;
 
     .car-item {
-        position: relative;
+        box-shadow: 0 0 0 #333;
 
         img {
             min-width: 100px;

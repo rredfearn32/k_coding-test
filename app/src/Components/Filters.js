@@ -31,7 +31,7 @@ export default class Filters extends React.Component {
                     e('div', {key: 'filterFavouritesContainer', className: 'col-6 d-flex align-items-center justify-content-end'}, [
                         // e('input', {key: 'filterFavouritesInput', id: 'favouritesFilter', type: 'checkbox', onChange: this.filterFavourites.bind(this)}, null),
                         // e('label', {key: 'filterFavouritesLabel', for: 'favouritesFilter', className: 'ml-2 mb-0'}, 'Only favourites')
-                        e(Toggle, {key: 'filterFavouritesToggle', name: 'filterFavouritesToggle', label: 'Only show favourites', onChange: this.filterFavourites.bind(this)}, null)
+                        e(Toggle, {key: 'filterFavouritesToggle', name: 'filterFavouritesToggle', label: 'Only favourites', onChange: this.filterFavourites.bind(this)}, null)
                     ])
                 ])
             ])

@@ -1,5 +1,5 @@
 import CarMeta from './CarMeta.js';
-import utils from '../utils/utils.js'
+import utils from '../../utils/utils.js'
 
 const e = React.createElement;
 

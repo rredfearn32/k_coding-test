@@ -1,4 +1,4 @@
-import Car from './Car.js'
+import Car from './Car/Car.js'
 import Filters from './Filters.js'
 
 const e = React.createElement;
@@ -22,15 +22,18 @@ export default class CarList extends React.Component {
             this.setState({
                 carObjects: data
             });
+            this.checkForFavouritedCars();
         });
-
-        this.checkForFavouritedCars();
     }
 
     checkForFavouritedCars() {
-        console.log('favouritedCarsCheck');
+        /**
+         * Normally the whole "filter only favourite cars" feature would be done through the server-side
+         * logic, with API calls to get either allCars or favouritedCars, depending if the filter is checked.
+         * However, because this test focuses around the front-end, I'm just going to do it with flags like this.
+         */
         this.setState({
-            noFavouritedCars: this.state.carObjects.filter(car => car.favourite).length > 0
+            favouritedCars: this.state.carObjects.filter(car => car.favourite).length > 0
         });
     }
 
@@ -50,36 +53,37 @@ export default class CarList extends React.Component {
         });
     }
 
+    getCarListOrEmptyMessage() {
+        let result;
+        if (!this.state.favouritedCars && this.state.filters.onlyFavourites) {
+            return e('div', {key: 'noFavouritedCars'}, 'No favourited cars')
+        }
+        
+        return e('div', {key: 'carlist', className: 'row'}, this.state.carObjects.map(car => {
+                
+                if (this.state.filters.onlyFavourites && !car.favourite) {
+                    return null;
+                } else {
+                    if (this.state.filters.searchTerm.length > 0) {
+                        for(const prop in car) {
+                            if (Object.prototype.hasOwnProperty.call(car, prop) && typeof car[prop] === 'string') {
+                                if (car[prop].toLowerCase().includes(this.state.filters.searchTerm.toLowerCase())) {
+                                    return e(Car, {key: car.driverID, car: car, toggleFavouriteByDriverID: this.toggleFavouriteByDriverID.bind(this)}, null);
+                                }
+                            }
+                        }
+                    } else {
+                        return e(Car, {key: car.driverID, car: car, toggleFavouriteByDriverID: this.toggleFavouriteByDriverID.bind(this)}, null)
+                    }
+                }
+            })
+        )
+    }
+
     render() {
-        let thereAreFavouritedCars = true;
         return e('div', {className: 'container mt-5'}, [
                 e(Filters, {key: 'filter', filters: this.state.filters, updateFilters: this.updateFilters.bind(this)}, null),
-                e('div', {key: 'foo'}, `Favourited cars: ${this.state.noFavouritedCars}`),
-                e('div', {key: 'bar'}, `Favourite filter on: ${this.state.filters.onlyFavourites}`),
-                (
-                    (!this.state.favouritedCars && this.state.filters.onlyFavourites) ?
-                        e('div', {key: 'noFavouritedCars'}, 'No favourited cars')
-                    :
-                        e('div', {key: 'carlist', className: 'row'}, this.state.carObjects.map(car => {
-                                
-                                if (this.state.filters.onlyFavourites && !car.favourite) {
-                                    return null;
-                                } else {
-                                    if (this.state.filters.searchTerm.length > 0) {
-                                        for(const prop in car) {
-                                            if (Object.prototype.hasOwnProperty.call(car, prop) && typeof car[prop] === 'string') {
-                                                if (car[prop].toLowerCase().includes(this.state.filters.searchTerm.toLowerCase())) {
-                                                    return e(Car, {key: car.driverID, car: car, updateCar: this.updateCar.bind(this)}, null);
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        return e(Car, {key: car.driverID, car: car, toggleFavouriteByDriverID: this.toggleFavouriteByDriverID.bind(this)}, null)
-                                    }
-                                }
-                            })
-                        )
-                )
+                this.getCarListOrEmptyMessage()
             ]
         )
     }

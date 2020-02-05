@@ -16,6 +16,6 @@ export default class Toggle extends React.Component {
                 ]),
                 e('label', {key: 'toggleLabel', className: 'ml-2 mb-0 pointer', htmlFor: this.props.name}, this.props.label)
             ])
-        )
+        );
     }
 }
